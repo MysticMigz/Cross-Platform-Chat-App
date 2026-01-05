@@ -5,6 +5,9 @@
 #include "../shared/Protocol.h"
 #include <iostream>
 #include <algorithm>
+#include <thread>
+#include <chrono>
+#include <cstring>
 
 #ifdef _WIN32
     #pragma comment(lib, "ws2_32.lib")
@@ -65,7 +68,7 @@ void ClientSession::sendMessage(const std::vector<uint8_t>& data) {
 
 bool ClientSession::receiveData(std::vector<uint8_t>& buffer) {
     MessageHeader header;
-    ssize_t bytesReceived = 0;
+    int bytesReceived = 0;
     
     // First, receive the header
     bytesReceived = recv(socket_, reinterpret_cast<char*>(&header), sizeof(MessageHeader), 0);
@@ -74,7 +77,7 @@ bool ClientSession::receiveData(std::vector<uint8_t>& buffer) {
         return false;
     }
     
-    if (bytesReceived != sizeof(MessageHeader)) {
+    if (bytesReceived != static_cast<int>(sizeof(MessageHeader))) {
         // Partial header received, would need buffering in production
         return false;
     }
@@ -91,7 +94,7 @@ bool ClientSession::receiveData(std::vector<uint8_t>& buffer) {
     if (header.payloadSize > 0) {
         bytesReceived = recv(socket_, reinterpret_cast<char*>(buffer.data() + sizeof(MessageHeader)), 
                            header.payloadSize, 0);
-        if (bytesReceived != static_cast<ssize_t>(header.payloadSize)) {
+        if (bytesReceived != static_cast<int>(header.payloadSize)) {
             return false;
         }
     }
@@ -102,9 +105,9 @@ bool ClientSession::receiveData(std::vector<uint8_t>& buffer) {
 bool ClientSession::sendData(const std::vector<uint8_t>& data) {
     size_t totalSent = 0;
     while (totalSent < data.size()) {
-        ssize_t bytesSent = send(socket_, 
+        int bytesSent = send(socket_, 
                                 reinterpret_cast<const char*>(data.data() + totalSent),
-                                data.size() - totalSent, 0);
+                                static_cast<int>(data.size() - totalSent), 0);
         if (bytesSent <= 0) {
             return false;
         }

@@ -2,6 +2,7 @@
 #include "../shared/Serializer.h"
 #include "../shared/Message.h"
 #include <iostream>
+#include <algorithm>
 
 MessageRouter::MessageRouter() {
 }

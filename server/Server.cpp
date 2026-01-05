@@ -1,6 +1,10 @@
 #include "Server.h"
 #include <iostream>
 #include <algorithm>
+#include <thread>
+#include <chrono>
+#include <mutex>
+#include <cstring>
 
 #ifdef _WIN32
     #pragma comment(lib, "ws2_32.lib")

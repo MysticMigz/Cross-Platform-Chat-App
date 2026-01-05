@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <atomic>
+#include <thread>
+#include <mutex>
 
 class UI {
 public:

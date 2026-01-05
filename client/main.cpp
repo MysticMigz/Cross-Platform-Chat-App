@@ -1,6 +1,8 @@
 #include "Client.h"
 #include <iostream>
 #include <string>
+#include <thread>
+#include <chrono>
 
 int main(int argc, char* argv[]) {
     std::string host = "127.0.0.1";

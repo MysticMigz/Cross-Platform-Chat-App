@@ -90,7 +90,7 @@ void Network::disconnect() {
 
 bool Network::receiveData(std::vector<uint8_t>& buffer) {
     MessageHeader header;
-    ssize_t bytesReceived = 0;
+    int bytesReceived = 0;
     
     // Receive header
     bytesReceived = recv(socket_, reinterpret_cast<char*>(&header), sizeof(MessageHeader), 0);
@@ -99,7 +99,7 @@ bool Network::receiveData(std::vector<uint8_t>& buffer) {
         return false;
     }
     
-    if (bytesReceived != sizeof(MessageHeader)) {
+    if (bytesReceived != static_cast<int>(sizeof(MessageHeader))) {
         return false;
     }
     
@@ -115,7 +115,7 @@ bool Network::receiveData(std::vector<uint8_t>& buffer) {
     if (header.payloadSize > 0) {
         bytesReceived = recv(socket_, reinterpret_cast<char*>(buffer.data() + sizeof(MessageHeader)), 
                            header.payloadSize, 0);
-        if (bytesReceived != static_cast<ssize_t>(header.payloadSize)) {
+        if (bytesReceived != static_cast<int>(header.payloadSize)) {
             return false;
         }
     }
@@ -126,9 +126,9 @@ bool Network::receiveData(std::vector<uint8_t>& buffer) {
 bool Network::sendData(const std::vector<uint8_t>& data) {
     size_t totalSent = 0;
     while (totalSent < data.size()) {
-        ssize_t bytesSent = send(socket_, 
+        int bytesSent = send(socket_, 
                                 reinterpret_cast<const char*>(data.data() + totalSent),
-                                data.size() - totalSent, 0);
+                                static_cast<int>(data.size() - totalSent), 0);
         if (bytesSent <= 0) {
             return false;
         }
