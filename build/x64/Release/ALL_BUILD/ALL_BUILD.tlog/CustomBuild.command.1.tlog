@@ -1,0 +1,10 @@
+^C:\USERS\MIGUE\DESKTOP\CROSS-PLATFORM CHAT APP\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/migue/Desktop/Cross-Platform Chat App" "-BC:/Users/migue/Desktop/Cross-Platform Chat App/build" --check-stamp-file "C:/Users/migue/Desktop/Cross-Platform Chat App/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

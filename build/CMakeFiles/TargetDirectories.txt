@@ -1,0 +1,5 @@
+C:/Users/migue/Desktop/Cross-Platform Chat App/build/CMakeFiles/chat-server.dir
+C:/Users/migue/Desktop/Cross-Platform Chat App/build/CMakeFiles/chat-client.dir
+C:/Users/migue/Desktop/Cross-Platform Chat App/build/CMakeFiles/INSTALL.dir
+C:/Users/migue/Desktop/Cross-Platform Chat App/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/migue/Desktop/Cross-Platform Chat App/build/CMakeFiles/ZERO_CHECK.dir

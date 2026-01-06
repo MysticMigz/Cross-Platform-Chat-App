@@ -9,7 +9,7 @@ enum class MessageType : uint8_t {
     TEXT = 0,
     JOIN = 1,
     LEAVE = 2,
-    ERROR = 3,
+    ERROR_MSG = 3,
     SYSTEM = 4,
     USER_LIST = 5
 };
